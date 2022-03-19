@@ -7,6 +7,8 @@
 // @include  https://www.twitter.com/*
 // @include  https://twitter.com/*
 // @include  https://mobile.twitter.com/*
+// @downloadURL http://hova.org/AutoTiwitterReload.user.js
+// @updateURL   http://hova.org/AutoTiwitterReload.user.js
 // ==/UserScript==
 var FindSpanLoopCount = 0;
 var WaitingOnPageLoad = false;
