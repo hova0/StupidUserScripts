@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name     Auto-reload twitter
-// @version  2.1.1
+// @version  2.2.0
 // @grant    none
 // @author   hova
 // @author   garamir
