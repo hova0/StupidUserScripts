@@ -1,14 +1,12 @@
 // ==UserScript==
 // @name     Auto-reload twitter
-// @version  2.2.0
+// @version  2.2.1
 // @grant    none
 // @author   hova
 // @author   garamir
 // @include  https://www.twitter.com/*
 // @include  https://twitter.com/*
 // @include  https://mobile.twitter.com/*
-// @downloadURL http://hova.org/AutoTwitterReload.user.js
-// @updateURL   http://hova.org/AutoTwitterReload.user.js
 // ==/UserScript==
 var FindSpanLoopCount = 0;
 var WaitingOnPageLoad = false;
