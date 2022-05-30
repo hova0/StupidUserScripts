@@ -9,7 +9,28 @@
 var gs_currentsong;
 var stopnext = false;
 console.log('Script autonext activate');
-
+var volume_control = document.createElement('input');
+volume_control.setAttribute('type', 'text');
+volume_control.style.position = 'fixed';
+volume_control.style.left = '12px';
+volume_control.style.top = '12px';
+volume_control.setAttribute('value', '70');
+volume_control.style.zIndex = '99';
+volume_control.id = 'volume_control';
+volume_control.title = 'Volume Control';
+volume_control.onchange = () => {
+	let volumevalue = document.getElementById('volume_control').value;
+	console.log("Changing volume to " + volumevalue);
+	let audioelements = document.querySelectorAll('audio');
+	for (let i = 0; i < audioelements.length; i++) {
+		if (audioelements[i].paused == false) {
+			if (parseInt(this.value) != NaN) {
+				audioelements[i].volume = (parseInt(volumevalue) / 100.0);
+			}
+		}
+	}
+};
+document.body.appendChild(volume_control);
 window.setInterval(async () => {
 	//console.log('Script autonext interval');
 	try {
@@ -46,7 +67,8 @@ window.setInterval(async () => {
 				}
 			}
 		} else {
-			if (document.querySelector('div.result-current.discover-result>div.discover-item>a.playing').parentElement
+			if (document.querySelector('div.result-current.discover-result>div.discover-item>a.playing') != null &&
+				document.querySelector('div.result-current.discover-result>div.discover-item>a.playing').parentElement
 				!= songitems[gs_currentsong]) {
 				let playingsong = document.querySelector('div.result-current.discover-result>div.discover-item>a.playing').parentElement;
 				for (i = 0; i < songitems.length; i++) {
@@ -59,7 +81,7 @@ window.setInterval(async () => {
 			}
 		}
 	} catch (err) {
-		console.log('Error happen' + err);
+		console.log(err);
 	}
 
 }, 1000);
