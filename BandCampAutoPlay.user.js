@@ -60,8 +60,6 @@ window.setInterval(async () => {
 					await new Promise(r => setTimeout(r, 2000));
 					gs_currentsong = 0;
 					document.querySelector('div.result-current.discover-result>div.discover-item>a.item-link.playable').click()
-					// TEMP
-					stopnext = true;
 				} else {
 					// next song
 					console.log('Activating song ' + gs_currentsong);
