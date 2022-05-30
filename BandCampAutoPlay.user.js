@@ -38,11 +38,22 @@ window.setInterval(async () => {
 	try {
 		if (stopnext)
 			return;
-		let songitems = document.querySelectorAll('div.result-current.discover-result>div.discover-item');
 
+
+		let songitems = document.querySelectorAll('div.result-current.discover-result>div.discover-item');
+		if (songitems.length == 0) {
+			stopnext = true;
+			console.log('Tumbleweed detected');
+			document.querySelector('div.discover-pages>div>a.selected').dispatchEvent(new Event('mousedown'));
+			await new Promise(r => setTimeout(r, 5000));
+			stopnext = false;
+			return;
+		}
 		if (document.querySelector('div.result-current.discover-result>div>a.playing') == null
 			&& document.querySelector('span.time_elapsed').innerText == '00:00') {
 			console.log('Song not playing, activating next song');
+			stopnext = true;
+			await new Promise(r => setTimeout(r, 5000));
 			// next song plz
 			if (gs_currentsong == null) {
 				console.log('Starting first song');
@@ -54,17 +65,20 @@ window.setInterval(async () => {
 				gs_currentsong++;
 				if (gs_currentsong > 7) {
 					// next set 
+					stopnext = true;
 					console.log('Going to next page of songs');
 					//let currentpage = document.querySelector('div.discover-pages>div>a.selected')
 					document.querySelector('div.discover-pages>div>a.selected').nextElementSibling.dispatchEvent(new Event('mousedown'));
 					await new Promise(r => setTimeout(r, 2000));
 					gs_currentsong = 0;
 					document.querySelector('div.result-current.discover-result>div.discover-item>a.item-link.playable').click()
+					stopnext = false;
 				} else {
 					// next song
 					console.log('Activating song ' + gs_currentsong);
 					songitems[gs_currentsong].querySelector('a.item-link.playable').click();
 				}
+				stopnext = false;
 			}
 		} else {
 			if (document.querySelector('div.result-current.discover-result>div.discover-item>a.playing') != null &&
