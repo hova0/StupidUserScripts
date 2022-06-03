@@ -3,7 +3,7 @@
 // @version  1
 // @grant    none
 // @author 		hova
-// @include 	https://bandcamp.com/?*
+// @include 	https://bandcamp.com/*
 // ==/UserScript==
 
 var gs_currentsong;
@@ -78,8 +78,9 @@ window.setInterval(async () => {
 					console.log('Activating song ' + gs_currentsong);
 					songitems[gs_currentsong].querySelector('a.item-link.playable').click();
 				}
-				stopnext = false;
+
 			}
+			stopnext = false;
 		} else {
 			if (document.querySelector('div.result-current.discover-result>div.discover-item>a.playing') != null &&
 				document.querySelector('div.result-current.discover-result>div.discover-item>a.playing').parentElement
